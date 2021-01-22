@@ -14,7 +14,7 @@ color = (255,224,179)
 sprite_list = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
 #print(screen_info)
-
+#initial Setup with phase 1 complete
 def main():
   game_over = False
   while True:
