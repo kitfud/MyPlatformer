@@ -13,8 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.xy_speed = pygame.math.Vector2(0, 0)
         self.facing = "R"
         self.jump_speed = -14
-        # self.world_y = 0
-        # self.progress = 0
+        self.world_y = 0
+        self.progress = 0
 
     def update(self, platforms):
         screen_info = pygame.display.Info()
@@ -28,6 +28,11 @@ class Player(pygame.sprite.Sprite):
         elif self.rect.left > screen_info.current_w:
             self.rect.right = 0
         
+        # handle progress as reaching top of screen
+        self.world_y += self.xy_speed[1]*-1
+        if self.world_y > self.progress:
+          self.progress = self.world_y
+      
      
         # scroll platforms down
         if self.rect.top < 100:

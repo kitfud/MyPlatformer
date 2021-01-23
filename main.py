@@ -39,6 +39,7 @@ def init(p1_actions):
     player = Player((platforms.sprites()[-1].rect.centerx, platforms.sprites()[-1].rect.centery-300), p1_actions)
     sprite_list.add(player)
 
+font = pygame.font.SysFont(None, 70)
 
 def main():
     global player
@@ -46,7 +47,7 @@ def main():
     # create platforms
     p1_actions = get_player_actions()
     init(p1_actions)
-
+   
     while True:
         clock.tick(60)
         for event in pygame.event.get():
@@ -66,10 +67,13 @@ def main():
 
         player.update(platforms)
             
-    
+        text = font.render("Score: {}".format(player.progress), True, (255, 0, 0))
+        text_rect = text.get_rect()
+
         screen.fill(color)
         platforms.draw(screen)
         sprite_list.draw(screen)
+        screen.blit(text, text_rect)
        
         pygame.display.flip()
 
