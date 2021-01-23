@@ -64,8 +64,8 @@ def main():
         if keys[pygame.K_RIGHT]:
             player.right()
 
-        if player.update(platforms):
-            game_over = True
+        player.update(platforms)
+            
     
         screen.fill(color)
         platforms.draw(screen)
