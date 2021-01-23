@@ -27,6 +27,22 @@ class Player(pygame.sprite.Sprite):
             self.rect.left = screen_info.current_w
         elif self.rect.left > screen_info.current_w:
             self.rect.right = 0
+        
+     
+        # scroll platforms down
+        if self.rect.top < 100:
+          self.rect.top = 100
+          for plat in platforms.sprites():
+            plat.scroll(-1*self.xy_speed[1])
+        # scroll platforms up (player fell off world)
+        elif self.rect.top > screen_info.current_h-80:
+          self.rect.top = screen_info.current_h-80
+          for plat in platforms.sprites():
+            if plat.rect.bottom > 0:
+              plat.scroll(-1*self.xy_speed[1])
+            else:
+              plat.kill()
+          return True
 
 
         # check if the player hit any platforms
