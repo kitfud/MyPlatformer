@@ -58,6 +58,11 @@ def main():
                     pygame.display.set_mode(size, FULLSCREEN)
                 if event.key == K_ESCAPE:
                     pygame.display.set_mode(size)
+                #resets the game by pressing 'r'
+                if game_over and event.key == K_r:
+                    player.kill()
+                    init(p1_actions)
+                    game_over = False
                 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -65,7 +70,9 @@ def main():
         if keys[pygame.K_RIGHT]:
             player.right()
 
-        player.update(platforms)
+        if player.update(platforms):
+          game_over= True
+
             
         text = font.render("Score: {}".format(player.progress), True, (255, 0, 0))
         text_rect = text.get_rect()
